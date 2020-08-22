@@ -46,18 +46,29 @@ class Handler(FileSystemEventHandler):
 
     elif event.event_type == 'created':
       # Take any action here when a file is first created.
-      print("Received created event - {}".format(event.src_path))
+#      print("Received created event - {}".format(event.src_path))
 
       try:
         for item in self.extList.fileTypes:
-          if (("*[" in item) and ("@" in item) and ("]*" in item)) :
-            item = item.replace("[","")
-            item = item.replace("]", "")
-          if "cryptsvc@mail.ru" in item:
-            item = item.replace("cryptsvc@mail.ru", "")
+          # multiple stars are not handled, so handle it here
+          if "********" in item:
+            item = item.replace("********", "*")
+          elif "*********" in item:
+            item = item.replace("*********" "*")
+      
+          # print("pattern is : {}".format(pattern))
+          item = item.replace("[", "asghar")
+          item = item.replace("-", "antar")
+          item = item.replace("]", "akbar")
+          
           regexRAW = fnmatch.translate(item)
-          regexRAW = regexRAW.replace("-", "\-")
-          if (re.match(regexRAW, fileName)):
+          
+          regexRAW = regexRAW.replace("asghar", "\[")
+          regexRAW = regexRAW.replace("antar", "\-")
+          regexRAW = regexRAW.replace("akbar", "\]")
+          
+          # item is fixed lets check if ransom or not
+          if (re.search(regexRAW, fileName)):
             print("\033[1;31;48m" + "Suspeciuos Ransom file or format detected in: " + "\033[4;37;48m" +  "{}".format(event.src_path) + "\033[1;37;0m")
             print("PATTERN MATCHED WAS : {}".format(regexRAW))
             break
@@ -67,18 +78,28 @@ class Handler(FileSystemEventHandler):
 
     elif event.event_type == 'modified':
       # Taken any action here when a file is modified.
-      print("Received modified event - {}".format(event.src_path))
+ #     print("Received modified event - {}".format(event.src_path))
       
       try:
         for item in self.extList.fileTypes:
-          if (("*[" in item) and ("@" in item) and ("]*" in item)) :
-            item = item.replace("[","")
-            item = item.replace("]", "")
-          if "cryptsvc@mail.ru" in item:
-            item = item.replace("cryptsvc@mail.ru", "")
+          # multiple stars are not handled, so handle it here
+          if "********" in item:
+            item = item.replace("********", "*")
+          elif "*********" in item:
+            item = item.replace("*********" "*")
+      
+          # print("pattern is : {}".format(pattern))
+          item = item.replace("[", "asghar")
+          item = item.replace("-", "antar")
+          item = item.replace("]", "akbar")
+          
           regexRAW = fnmatch.translate(item)
-          regexRAW = regexRAW.replace("-", "\-")
-          if (re.match(regexRAW, fileName)):
+          
+          regexRAW = regexRAW.replace("asghar", "\[")
+          regexRAW = regexRAW.replace("antar", "\-")
+          regexRAW = regexRAW.replace("akbar", "\]")
+          
+          if (re.search(regexRAW, fileName)):
             print("\033[1;31;48m" + "Suspeciuos Ransom file or format detected in: " + "\033[4;37;48m" +  "{}".format(event.src_path) + "\033[1;37;0m")
             print("PATTERN MATCHED WAS : {}".format(regexRAW))
             break
@@ -88,18 +109,28 @@ class Handler(FileSystemEventHandler):
 
     elif event.event_type == 'deleted':
       # Taken any action here when a file is modified.
-      print("Received deleted event - {}".format(event.src_path))
+#      print("Received deleted event - {}".format(event.src_path))
 
       try:
         for item in self.extList.fileTypes:
-          if (("*[" in item) and ("@" in item) and ("]*" in item)) :
-            item = item.replace("[","")
-            item = item.replace("]", "")
-          if "cryptsvc@mail.ru" in item:
-            item = item.replace("cryptsvc@mail.ru", "")
+          # multiple stars are not handled, so handle it here
+          if "********" in item:
+            item = item.replace("********", "*")
+          elif "*********" in item:
+            item = item.replace("*********" "*")
+      
+          # print("pattern is : {}".format(pattern))
+          item = item.replace("[", "asghar")
+          item = item.replace("-", "antar")
+          item = item.replace("]", "akbar")
+          
           regexRAW = fnmatch.translate(item)
-          regexRAW = regexRAW.replace("-", "\-")
-          if (re.match(regexRAW, fileName)):
+          
+          regexRAW = regexRAW.replace("asghar", "\[")
+          regexRAW = regexRAW.replace("antar", "\-")
+          regexRAW = regexRAW.replace("akbar", "\]")
+          
+          if (re.search(regexRAW, fileName)):
             print("\033[1;31;48m" + "Suspeciuos Ransom file or format detected in: " + "\033[4;37;48m" +  "{}".format(event.src_path) + "\033[1;37;0m")
             print("PATTERN MATCHED WAS : {}".format(regexRAW))
             break
