@@ -1,10 +1,19 @@
 {
   "api": {
-    "file_group_count": 4089,
+    "file_group_count": 4098,
     "format": "json",
     "version": 1
   },
   "filters": [
+    "*.Aim",
+    "*.get",
+    "*.Back",
+    "*.morseop*",
+    "*.jigsaaw",
+    "*.ReadManual.*",
+    "*.[XMRLocker]",
+    "*.wannacry",
+    "*.morseop-7j9wrqr",
     "*.volvo33_36_37_39__44",
     "*.id[*-2275].[helprecover@foxmail.com].help",
     "*.saved",
@@ -4095,5 +4104,5 @@
     "*.8lock8",
     "*.777"
   ],
-  "lastUpdated": "2020-08-21T16:02:44.000000Z"
+  "lastUpdated": "2020-08-24T14:20:19.000000Z"
 }

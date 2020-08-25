@@ -41,6 +41,9 @@ class Handler(FileSystemEventHandler):
     # save file name here
     fileName = os.path.basename(event.src_path)
     
+    # TODO: Sometimes file create also flags as file modification, so for 1 event 1 alerts are fired
+          # fix this or make it conditional. Sometimes ommiting things like this might lead to bypasses.
+
     if event.is_directory:
       return None
 
@@ -69,7 +72,7 @@ class Handler(FileSystemEventHandler):
           
           # item is fixed lets check if ransom or not
           if (re.search(regexRAW, fileName)):
-            print("\033[1;31;48m" + "Suspeciuos Ransom file or format detected in: " + "\033[4;37;48m" +  "{}".format(event.src_path) + "\033[1;37;0m")
+            print("\033[1;31;48m" + "Suspeciuos Ransom file or format detected in (CREATE): " + "\033[4;37;48m" +  "{}".format(event.src_path) + "\033[1;37;0m")
             print("PATTERN MATCHED WAS : {}".format(regexRAW))
             break
       except Exception as ex:
@@ -100,7 +103,7 @@ class Handler(FileSystemEventHandler):
           regexRAW = regexRAW.replace("akbar", "\]")
           
           if (re.search(regexRAW, fileName)):
-            print("\033[1;31;48m" + "Suspeciuos Ransom file or format detected in: " + "\033[4;37;48m" +  "{}".format(event.src_path) + "\033[1;37;0m")
+            print("\033[1;31;48m" + "Suspeciuos Ransom file or format detected in (MODIFIED): " + "\033[4;37;48m" +  "{}".format(event.src_path) + "\033[1;37;0m")
             print("PATTERN MATCHED WAS : {}".format(regexRAW))
             break
       except Exception as ex:
@@ -131,7 +134,7 @@ class Handler(FileSystemEventHandler):
           regexRAW = regexRAW.replace("akbar", "\]")
           
           if (re.search(regexRAW, fileName)):
-            print("\033[1;31;48m" + "Suspeciuos Ransom file or format detected in: " + "\033[4;37;48m" +  "{}".format(event.src_path) + "\033[1;37;0m")
+            print("\033[1;31;48m" + "Suspeciuos Ransom file or format detected in (DELETE): " + "\033[4;37;48m" +  "{}".format(event.src_path) + "\033[1;37;0m")
             print("PATTERN MATCHED WAS : {}".format(regexRAW))
             break
       except Exception as ex:
