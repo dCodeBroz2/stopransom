@@ -11,7 +11,10 @@ class ransomWare:
     self.checkJson()
     
     with open('ransomDB.json', 'r') as rDB:
-      self.fileTypes = json.load(rDB)['filters']
+      
+      tempJsom = json.load(rDB)
+      self.fileTypes = tempJsom['filters']
+      self.lastUpdateDate = tempJsom['lastUpdated']
       
   def updateJson(self):
     print("[+]Checking for newer extensions...")
