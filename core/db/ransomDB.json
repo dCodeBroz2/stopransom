@@ -1,10 +1,18 @@
 {
   "api": {
-    "file_group_count": 4098,
+    "file_group_count": 4106,
     "format": "json",
     "version": 1
   },
   "filters": [
+    "*.WSHLP",
+    "*.SXS",
+    "*.[*].[akzhq808@tutanota.com].makop",
+    "*.Mnd4",
+    "*.CYRAT",
+    "*.Death_Of_Shadow",
+    "*.*GLADIUS",
+    "*.boop",
     "*.Aim",
     "*.get",
     "*.Back",
@@ -4104,5 +4112,5 @@
     "*.8lock8",
     "*.777"
   ],
-  "lastUpdated": "2020-08-24T14:20:19.000000Z"
+  "lastUpdated": "2020-08-28T15:54:46.000000Z"
 }
