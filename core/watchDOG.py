@@ -13,7 +13,7 @@ class watchDOG:
   
   print("Enter directory to watch.")
   DIRECTORY_TO_WATCH = Path(input(">"))
-  
+  print(f"Directory that is entered for monitoring is: {DIRECTORY_TO_WATCH}")
   def __init__(self):
     self.observer = Observer()
 
