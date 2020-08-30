@@ -83,9 +83,11 @@ class detectionAPI:
     endColoring = attr('reset')
     underLine = attr('underlined')
     blinked = attr('blink')
+    pinkColor = fg('deep_pink_4c')
+    violetRed = fg('medium_violet_red')
     
     if (self.ransomDetect(eventFileName, eventType, eventPath)):
       # It is a ransomware let print warning
-      print(blinked + boldFont + redColor + "Suspeciuos Ransom file or format detected in action" + f"(\"{eventType}\"): " + underLine + f"{eventPath}" + endColoring)
+      print(boldFont + redColor + "Suspeciuos Ransom file or format detected:" + pinkColor + f"\nACTION: (\"{eventType}\"): " + underLine + redColor + violetRed + f"\nFULL PATH: {eventPath}" + endColoring + "\n=============================") 
     else:
-      print(greenColor + "NOT A RANSOMWARE !")
+      print(greenColor + "NOT A RANSOMWARE !" + "\n=============================")
