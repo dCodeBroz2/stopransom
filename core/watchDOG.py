@@ -12,7 +12,7 @@ class watchDOG:
   """
   
   print("Enter directory to watch.")
-  DIRECTORY_TO_WATCH = Path(str(input(">")).replace('../', ''))
+  DIRECTORY_TO_WATCH = Path(input(">"))
   
   def __init__(self):
     self.observer = Observer()
