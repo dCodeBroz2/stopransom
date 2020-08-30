@@ -48,10 +48,10 @@ class Handler(FileSystemEventHandler):
     
     # save file name here
     fileName = os.path.basename(event.src_path)
-    print(f"fileName is now: {fileName}")
+    # print(f"fileName is now: {fileName}")
     
-    # if event.is_directory:
-    #   pass
-    # else:
-    self.dAPIObj.warningRansom(fileName, event.event_type, event.src_path)
+    if event.is_directory:
+      pass
+    else:
+      self.dAPIObj.warningRansom(fileName, event.event_type, event.src_path)
 

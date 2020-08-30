@@ -1,7 +1,7 @@
 import re
 import fnmatch
 import ransomWare
-
+from colored import fg, attr
 
 class detectionAPI:
   def __init__(self):
@@ -77,13 +77,15 @@ class detectionAPI:
         eventType ([str, mod, del, cre]): [type of the event, CRUD]
         eventPath ([type]): [the full path of the file in event]
     """
-    
-    redColor = '\033[1;31;48m'
-    endColoring = '\033[1;37;0m'
-    underLine = '\033[4;37;48m'
+    boldFont = attr('bold')
+    greenColor = fg('green')
+    redColor = fg('red')
+    endColoring = attr('reset')
+    underLine = attr('underlined')
+    blinked = attr('blink')
     
     if (self.ransomDetect(eventFileName, eventType, eventPath)):
       # It is a ransomware let print warning
-      print(redColor + f"Suspeciuos Ransom file or format detected in action (\"{eventType}\"): " + underLine +  f"{eventPath}" + endColoring)
+      print(blinked + boldFont + redColor + "Suspeciuos Ransom file or format detected in action" + f"(\"{eventType}\"): " + underLine + f"{eventPath}" + endColoring)
     else:
-      print("NOT A RANSOMWARE!!!!!!!!!!!!!!!!!!!!!!!!!!!")
+      print(greenColor + "NOT A RANSOMWARE !")
