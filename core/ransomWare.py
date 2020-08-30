@@ -7,7 +7,7 @@ from pathlib import Path
 class ransomWare:
   def __init__(self):
     
-    self.dbFilePath = Path("core/db/ransomDB.json")
+    self.dbFilePath = Path("db/ransomDB.json")
     # Check if file exists, otherwise create it
     # In both cases update the json file
     self.checkJson()
