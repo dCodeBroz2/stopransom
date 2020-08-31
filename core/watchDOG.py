@@ -30,11 +30,13 @@ class watchDOG:
     """
     [Responsible for getting the directory to monitor]
     """
-
-    print("Enter directory to watch.")
-    self.DIRECTORY_TO_WATCH = Path(input(">"))   
-    # print(f"Directory that is entered for monitoring is: {DIRECTORY_TO_WATCH}")
-
+    try:
+      print("Enter directory to watch.")
+      self.DIRECTORY_TO_WATCH = Path(input(">"))   
+      # print(f"Directory that is entered for monitoring is: {DIRECTORY_TO_WATCH}")
+    except Exception as e:
+      print(f"Error occured: {e}")
+      
   def run(self):
     """
     [monitors filesystem events every 5 second]
