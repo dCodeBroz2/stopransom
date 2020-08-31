@@ -1,6 +1,7 @@
 import re
-import ransomWare
 from colored import fg, attr
+import ransomWare
+import DBConn
 
 class detectionAPI:
   def __init__(self):
@@ -14,7 +15,8 @@ class detectionAPI:
         
     """
     self.extList = ransomWare.ransomWare()
-
+    self.dbObj = DBConn.DBConn()
+  
   def ransomDetect(self, eventFileName, eventType, eventPath):
     """
     [Main ransomware detection method which can be used anywhere]
@@ -32,9 +34,15 @@ class detectionAPI:
         # regexRAW = self.extList.patternToREGEX(item)
         # item is fixed lets check if ransom or not
         if (re.match(regexRAW, eventFileName)):
+          
+          # lets call the mthod that writes to DB
+          self.dbObj.writeToDB(eventFileName, eventType, eventPath)
+          
+          # Lets tell them it is a ransom!
           return True
         continue
       
+      # lets tell them it is not a ransom!
       return False
 
     except Exception as ex:
