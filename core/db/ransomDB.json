@@ -1,10 +1,11 @@
 {
   "api": {
-    "file_group_count": 4106,
+    "file_group_count": 4107,
     "format": "json",
     "version": 1
   },
   "filters": [
+    "*.fezmm",
     "*.WSHLP",
     "*.SXS",
     "*.[*].[akzhq808@tutanota.com].makop",
@@ -4112,5 +4113,5 @@
     "*.8lock8",
     "*.777"
   ],
-  "lastUpdated": "2020-08-28T15:54:46.000000Z"
+  "lastUpdated": "2020-08-30T18:39:42.000000Z"
 }

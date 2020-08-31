@@ -1,49 +1,23 @@
 import re
-import fnmatch
 import ransomWare
 from colored import fg, attr
 
 class detectionAPI:
   def __init__(self):
-    
     """
-    This is class is going to check an event and for now prints if ransomware 
-    is detected.
+    [This class uses ransomWare extList attribute for its methods.]
+      attributes: 
+        extList: List of regexed ransom patterns
+      methods:
+        ransomDetect(): checks for ransom, returns true or false
+        warningRansom(): prints or later dumps to web gui detections
+        
     """
     self.extList = ransomWare.ransomWare()
-  
-  def fixRegEx(self, item):
-    """[file pattern to regex converter]
-
-    Args:
-        item ([string]): [gets a string which is a pattern from ransomDB.json and fix it
-         to match in regex format, actually converts from pattern to regex]
-
-    Returns:
-        [string]: [returns regex format of pattern]
-    """
-
-    if "********" in item:
-      item = item.replace("********", "*")
-    elif "*********" in item:
-      item = item.replace("*********" "*")
-
-    # print("pattern is : {}".format(pattern))
-    item = item.replace("[", "asghar")
-    item = item.replace("-", "antar")
-    item = item.replace("]", "akbar")
-    
-    regexRAW = fnmatch.translate(item)
-    
-    regexRAW = regexRAW.replace("asghar", "\[")
-    regexRAW = regexRAW.replace("antar", "\-")
-    regexRAW = regexRAW.replace("akbar", "\]")
-
-    return regexRAW
 
   def ransomDetect(self, eventFileName, eventType, eventPath):
-    """[Main ransomware detection method which can be used anywhere]
-
+    """
+    [Main ransomware detection method which can be used anywhere]
     Args:
         eventFileName ([str]): [file name in event]
         eventType ([str,CRUD]): [create, read, update, delete]
@@ -54,11 +28,10 @@ class detectionAPI:
     """
 
     try:
-      for item in self.extList.fileTypes:
-        regexRAW = self.fixRegEx(item)
-        
+      for regexRAW in self.extList.fileTypes:
+        # regexRAW = self.extList.patternToREGEX(item)
         # item is fixed lets check if ransom or not
-        if (re.search(regexRAW, eventFileName)):
+        if (re.match(regexRAW, eventFileName)):
           return True
         continue
       
@@ -68,9 +41,9 @@ class detectionAPI:
         print("ERROR at : {}".format(ex))
         print("Searched ITEM was:{} ||||| searched REGEXT was: {} ".format(eventFileName, regexRAW))
 
-        
   def warningRansom(self, eventFileName, eventType, eventPath):
-    """[Prints warning on console]
+    """
+    [Prints warning on console or web GUI]
 
     Args:
         eventFileName ([str]): [the name of the file in event]
@@ -88,6 +61,6 @@ class detectionAPI:
     
     if (self.ransomDetect(eventFileName, eventType, eventPath)):
       # It is a ransomware let print warning
-      print(boldFont + redColor + "Suspeciuos Ransom file or format detected:" + pinkColor + f"\nACTION: (\"{eventType}\"): " + underLine + redColor + violetRed + f"\nFULL PATH: {eventPath}" + endColoring + "\n=============================") 
+      print(boldFont + redColor + "Suspeciuos Ransom file or format detected:" + pinkColor + f"\nACTION: (\"{eventType}\")" + underLine + redColor + violetRed + f"\nFULL PATH: {eventPath}" + endColoring + "\n=============================") 
     else:
       print(greenColor + "NOT A RANSOMWARE !" + "\n=============================")
