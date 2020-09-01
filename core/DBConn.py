@@ -6,9 +6,9 @@ class DBConn:
   """
   def __init__(self):
 
-    if (self.createConnection() != "Null"):
+    if (self.createConnection() != None):
       self.dbConn = self.createConnection()
-      print("Successfully connected to DB, all set!!!")
+      print("[+]Successfully connected to DB")
     else:
       print("[-]Database Connection not possible working offline!")
 
@@ -24,11 +24,11 @@ class DBConn:
     try:
       db_file = Path("db/ransomSTATS.DB")
       conn = sqlite3.connect(db_file)
-      if (conn != "None"):
-        # print("[+]Connected to database successfully!")
-        return conn
-      else:
-        return conn
+      # if (conn != "None"):
+      #   # print("[+]Connected to database successfully!")
+      #   return conn
+      # else:
+      return conn
     except Exception as e:
       print(f"Error occured: {e}")
     
@@ -40,9 +40,10 @@ class DBConn:
     c = self.dbConn.cursor()
     
     # Create table
+    # TODO: Get time from event
     c.execute('''CREATE TABLE IF NOT EXISTS RansomedFiles(
         ID INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL,
-        TIME TIMESTAMP DEFAULT CURRENT_TIMESTAMP NOT NULL,
+        TIME TIMESTAMP DEFAULT CURRENT_TIMESTAMP NOT NULL, 
         EventFileName varchar(10),
         EventType varchar(10),
         EventPath varchar(10)
@@ -64,4 +65,4 @@ class DBConn:
     conn.commit()
     conn.close()
 
-    print("Wrote to the database successfully!")
+    # print("[+]Wrote to the database successfully!")

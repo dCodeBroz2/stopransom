@@ -46,8 +46,8 @@ class detectionAPI:
       return False
 
     except Exception as ex:
-        print("ERROR at : {}".format(ex))
-        print("Searched ITEM was:{} ||||| searched REGEXT was: {} ".format(eventFileName, regexRAW))
+      print("ERROR at : {}".format(ex))
+      print("Searched ITEM was:{} ||||| searched REGEXT was: {} ".format(eventFileName, regexRAW))
 
   def warningRansom(self, eventFileName, eventType, eventPath):
     """
