@@ -7,16 +7,16 @@ class detectionAPI:
   def __init__(self):
     """
     [This class uses ransomWare extList attribute for its methods.]
-      attributes: 
+      attributes:
         extList: List of regexed ransom patterns
       methods:
         ransomDetect(): checks for ransom, returns true or false
         warningRansom(): prints or later dumps to web gui detections
-        
+
     """
     self.extList = ransomWare.ransomWare()
     self.dbObj = DBConn.DBConn()
-  
+
   def ransomDetect(self, eventFileName, eventType, eventPath):
     """
     [Main ransomware detection method which can be used anywhere]
@@ -34,14 +34,14 @@ class detectionAPI:
         # regexRAW = self.extList.patternToREGEX(item)
         # item is fixed lets check if ransom or not
         if (re.match(regexRAW, eventFileName)):
-          
+
           # lets call the mthod that writes to DB
           self.dbObj.writeToDB(eventFileName, eventType, eventPath)
-          
+
           # Lets tell them it is a ransom!
           return True
         continue
-      
+
       # lets tell them it is not a ransom!
       return False
 
@@ -66,9 +66,10 @@ class detectionAPI:
     blinked = attr('blink')
     pinkColor = fg('deep_pink_4c')
     violetRed = fg('medium_violet_red')
-    
+
     if (self.ransomDetect(eventFileName, eventType, eventPath)):
       # It is a ransomware let print warning
-      print(boldFont + redColor + "Suspeciuos Ransom file or format detected:" + pinkColor + f"\nACTION: (\"{eventType}\")" + underLine + redColor + violetRed + f"\nFULL PATH: {eventPath}" + endColoring + "\n=============================") 
+      print(boldFont + redColor + "Suspeciuos Ransom file or format detected:" + pinkColor + f"\nACTION: (\"{eventType}\")" + underLine + redColor + violetRed + f"\nFULL PATH: {eventPath}" + endColoring + "\n=============================")
     else:
-      print(greenColor + "NOT A RANSOMWARE !" + "\n=============================")
+      # print(greenColor + "NOT A RANSOMWARE !" + "\n=============================")
+      pass

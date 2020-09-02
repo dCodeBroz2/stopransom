@@ -3,10 +3,10 @@ import watchDOG
 if __name__ == '__main__':
     w = watchDOG.watchDOG()
     w.run()
-  
+
 
 """
-  TODO: 
+  TODO:
   --------
   STEP 1- Write core functionality, the ransom class and class watchdog detector
     a. Core consist of two parts, part one is the core class ransomware and also another class which its job is to detect ransomware, something that we do in watchdog now.

@@ -14,7 +14,7 @@ class DBConn:
 
     # database is connected, lets create tables if not exists
     self.createDB_Table()
-  
+
   def createConnection(self):
     """ create a database connection to the SQLite database
     specified by db_file
@@ -31,24 +31,24 @@ class DBConn:
       return conn
     except Exception as e:
       print(f"Error occured: {e}")
-    
+
   def createDB_Table(self):
-    
+
     # Note that sqlite creates database if not exists!, so we don't check
     # create db and/or connect to it
     # conn = self.createConnection()
     c = self.dbConn.cursor()
-    
+
     # Create table
     # TODO: Get time from event
     c.execute('''CREATE TABLE IF NOT EXISTS RansomedFiles(
         ID INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL,
-        TIME TIMESTAMP DEFAULT CURRENT_TIMESTAMP NOT NULL, 
+        TIME TIMESTAMP DEFAULT CURRENT_TIMESTAMP NOT NULL,
         EventFileName varchar(10),
         EventType varchar(10),
         EventPath varchar(10)
       )''')
-      
+
   def writeToDB(self, eventFileName, eventType, eventPath):
     """
     [Responsible for writing to database, for now sqlite db]
@@ -60,7 +60,7 @@ class DBConn:
     """
     conn = self.createConnection()
     c = conn.cursor()
-    
+
     c.execute("INSERT INTO RansomedFiles (EventFileName, EventType, EventPath) VALUES (?,?,?)", (eventFileName, eventType, eventPath))
     conn.commit()
     conn.close()

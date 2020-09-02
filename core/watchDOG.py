@@ -9,13 +9,13 @@ from pathlib import Path
 class watchDOG:
   """
   [Is responsible for monitoring the events in directory and repeating this method
-   It has 2 purposes: 
+  It has 2 purposes:
     1. Testing detection in various phases
     2. Checks anti ransom appliance it self for ransom movement]
   
     Attributes:
       observer: is an object from class Observer
-      
+
     Methods:
     __init__(): initializes the observer class and gets the path to monitor
     getPath(): Gets the path from user
@@ -32,7 +32,12 @@ class watchDOG:
     """
     try:
       print("Enter directory to watch.")
-      self.DIRECTORY_TO_WATCH = Path(input(">"))   
+      self.DIRECTORY_TO_WATCH = Path(input(">"))
+      # cat /proc/sys/fs/inotify/max_user_watches  ===> 65536
+      # we changed it to : 524288
+      # sudo sysctl fs.inotify.max_user_watches=524288
+      
+      # self.DIRECTORY_TO_WATCH = Path(r"/home")
       # print(f"Directory that is entered for monitoring is: {DIRECTORY_TO_WATCH}")
     except Exception as e:
       print(f"Error occured: {e}")
