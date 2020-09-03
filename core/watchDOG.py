@@ -1,4 +1,7 @@
 import time
+from datetime import datetime
+from dateutil import tz
+from tzlocal import get_localzone
 from watchdog.observers import Observer
 from watchdog.events import FileSystemEventHandler
 import os.path
@@ -12,7 +15,7 @@ class watchDOG:
   It has 2 purposes:
     1. Testing detection in various phases
     2. Checks anti ransom appliance it self for ransom movement]
-  
+
     Attributes:
       observer: is an object from class Observer
 
@@ -21,11 +24,11 @@ class watchDOG:
     getPath(): Gets the path from user
     run(): Recuresively monitors path for events
   """
-    
+
   def __init__(self):
     self.observer = Observer()
     self.getPath()
-    
+
   def getPath(self):
     """
     [Responsible for getting the directory to monitor]
@@ -36,24 +39,24 @@ class watchDOG:
       # cat /proc/sys/fs/inotify/max_user_watches  ===> 65536
       # we changed it to : 524288
       # sudo sysctl fs.inotify.max_user_watches=524288
-      
+
       # self.DIRECTORY_TO_WATCH = Path(r"/home")
       # print(f"Directory that is entered for monitoring is: {DIRECTORY_TO_WATCH}")
     except Exception as e:
       print(f"Error occured: {e}")
-      
+
   def run(self):
     """
     [monitors filesystem events every 5 second]
     """
-    
+
     print("[+]Watching directory closely!")
     event_handler = Handler()
     self.observer.schedule(event_handler, self.DIRECTORY_TO_WATCH, recursive=True)
     self.observer.start()
     try:
       while True:
-        time.sleep(5)
+        time.sleep(60)
     except:
       self.observer.stop()
       print ("Error")
@@ -71,26 +74,81 @@ class Handler(FileSystemEventHandler):
     """
     [initializes an object from class detectionAPI to call its warningRansom method]
     """
-    
+
     # let create an instance of class ransomware
-    self.dAPIObj = detectionAPI.detectionAPI() 
-    # print("*"*20)
-    
+    self.dAPIObj = detectionAPI.detectionAPI()
+
+    unlocalisedDatetime = datetime.now()
+    dateTimeLocal = unlocalisedDatetime.astimezone(tz = tz.tzlocal()).replace(microsecond=0)
+    localZoneName = get_localzone()
+
+    self.eventDateTime = str(dateTimeLocal) + " " + str(localZoneName)
+
   # @staticmethod
-  def on_any_event(self,event):
+  def on_any_event(self, event):
     """
-    [responsible for ransom check on any event]
+    [responsible for ransom check on any events]
 
     Args:
         event ([object]): [object from class FileSystemEventHandler]
     """
-    
+
     # save file name here
     fileName = os.path.basename(event.src_path)
     # print(f"fileName is now: {fileName}")
-    
+
     if event.is_directory:
       pass
     else:
-      self.dAPIObj.warningRansom(fileName, event.event_type, event.src_path)
+      self.dAPIObj.warningRansom(self.eventDateTime, fileName, event.event_type, event.src_path)
 
+  # def on_created(self, event):
+  #   """
+  #   [responsible for ransom check on created events]
+
+  #   Args:
+  #       event ([object]): [object from class FileSystemEventHandler]
+  #   """
+
+  #   # save file name here
+  #   fileName = os.path.basename(event.src_path)
+  #   # print(f"fileName is now: {fileName}")
+
+  #   if event.is_directory:
+  #     pass
+  #   else:
+  #     self.dAPIObj.warningRansom(self.eventDateTime,fileName, event.event_type, event.src_path)
+
+  # def on_modified(self, event):
+  #   """
+  #   [responsible for ransom check on modified events]
+
+  #   Args:
+  #       event ([object]): [object from class FileSystemEventHandler]
+  #   """
+
+  #   # save file name here
+  #   fileName = os.path.basename(event.src_path)
+  #   # print(f"fileName is now: {fileName}")
+
+  #   if event.is_directory:
+  #     pass
+  #   else:
+  #     self.dAPIObj.warningRansom(fileName, event.event_type, event.src_path)
+
+  # def on_moved(self, event):
+  #   """
+  #   [responsible for ransom check on moved events]
+
+  #   Args:
+  #       event ([object]): [object from class FileSystemEventHandler]
+  #   """
+
+  #   # save file name here
+  #   fileName = os.path.basename(event.src_path)
+  #   # print(f"fileName is now: {fileName}")
+
+  #   if event.is_directory:
+  #     pass
+  #   else:
+  #     self.dAPIObj.warningRansom(fileName, event.event_type, event.src_path)

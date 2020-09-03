@@ -49,7 +49,7 @@ class DBConn:
         EventPath varchar(10)
       )''')
 
-  def writeToDB(self, eventFileName, eventType, eventPath):
+  def writeToDB(self, eventDateTime, eventFileName, eventType, eventPath):
     """
     [Responsible for writing to database, for now sqlite db]
 
@@ -61,7 +61,7 @@ class DBConn:
     conn = self.createConnection()
     c = conn.cursor()
 
-    c.execute("INSERT INTO RansomedFiles (EventFileName, EventType, EventPath) VALUES (?,?,?)", (eventFileName, eventType, eventPath))
+    c.execute("INSERT INTO RansomedFiles (TIME, EventFileName, EventType, EventPath) VALUES (?,?,?,?)", (eventDateTime, eventFileName, eventType, eventPath))
     conn.commit()
     conn.close()
 

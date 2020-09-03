@@ -17,7 +17,7 @@ class detectionAPI:
     self.extList = ransomWare.ransomWare()
     self.dbObj = DBConn.DBConn()
 
-  def ransomDetect(self, eventFileName, eventType, eventPath):
+  def ransomDetect(self, eventDateTime, eventFileName, eventType, eventPath):
     """
     [Main ransomware detection method which can be used anywhere]
     Args:
@@ -36,7 +36,7 @@ class detectionAPI:
         if (re.match(regexRAW, eventFileName)):
 
           # lets call the mthod that writes to DB
-          self.dbObj.writeToDB(eventFileName, eventType, eventPath)
+          self.dbObj.writeToDB(eventDateTime, eventFileName, eventType, eventPath)
 
           # Lets tell them it is a ransom!
           return True
@@ -46,10 +46,10 @@ class detectionAPI:
       return False
 
     except Exception as ex:
-      print("ERROR at : {}".format(ex))
-      print("Searched ITEM was:{} ||||| searched REGEXT was: {} ".format(eventFileName, regexRAW))
+      print(f"ERROR at : {ex}")
+      print(f"Searched ITEM was:{eventFileName} ||||| searched REGEXT was: {regexRAW}")
 
-  def warningRansom(self, eventFileName, eventType, eventPath):
+  def warningRansom(self, eventDateTime, eventFileName, eventType, eventPath):
     """
     [Prints warning on console or web GUI]
 
@@ -67,9 +67,9 @@ class detectionAPI:
     pinkColor = fg('deep_pink_4c')
     violetRed = fg('medium_violet_red')
 
-    if (self.ransomDetect(eventFileName, eventType, eventPath)):
+    if (self.ransomDetect(eventDateTime, eventFileName, eventType, eventPath)):
       # It is a ransomware let print warning
-      print(boldFont + redColor + "Suspeciuos Ransom file or format detected:" + pinkColor + f"\nACTION: (\"{eventType}\")" + underLine + redColor + violetRed + f"\nFULL PATH: {eventPath}" + endColoring + "\n=============================")
+      print(boldFont + redColor + f"Suspeciuos Ransom file or format detected ({eventDateTime}) :" + pinkColor + f"\nACTION: (\"{eventType}\")" + underLine + redColor + violetRed + f"\nFULL PATH: {eventPath}" + endColoring + "\n=============================")
     else:
       # print(greenColor + "NOT A RANSOMWARE !" + "\n=============================")
       pass

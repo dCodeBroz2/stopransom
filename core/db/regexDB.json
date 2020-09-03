@@ -1,10 +1,11 @@
 {
   "api": {
-    "file_group_count": 4107,
+    "file_group_count": 4108,
     "format": "json",
     "version": 1
   },
   "filters": [
+    "(?s:.*\\.klavins)\\Z",
     "(?s:.*\\.fezmm)\\Z",
     "(?s:.*\\.WSHLP)\\Z",
     "(?s:.*\\.SXS)\\Z",
@@ -4113,5 +4114,5 @@
     "(?s:.*\\.8lock8)\\Z",
     "(?s:.*\\.777)\\Z"
   ],
-  "lastUpdated": "2020-08-30T18:39:42.000000Z"
+  "lastUpdated": "2020-09-01T16:45:46.000000Z"
 }
