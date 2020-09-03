@@ -102,53 +102,10 @@ class Handler(FileSystemEventHandler):
     else:
       self.dAPIObj.warningRansom(self.eventDateTime, fileName, event.event_type, event.src_path)
 
-  # def on_created(self, event):
-  #   """
-  #   [responsible for ransom check on created events]
-
-  #   Args:
-  #       event ([object]): [object from class FileSystemEventHandler]
-  #   """
-
-  #   # save file name here
+  # def returnEventStats(self, event):
   #   fileName = os.path.basename(event.src_path)
-  #   # print(f"fileName is now: {fileName}")
 
   #   if event.is_directory:
-  #     pass
+  #     return None
   #   else:
-  #     self.dAPIObj.warningRansom(self.eventDateTime,fileName, event.event_type, event.src_path)
-
-  # def on_modified(self, event):
-  #   """
-  #   [responsible for ransom check on modified events]
-
-  #   Args:
-  #       event ([object]): [object from class FileSystemEventHandler]
-  #   """
-
-  #   # save file name here
-  #   fileName = os.path.basename(event.src_path)
-  #   # print(f"fileName is now: {fileName}")
-
-  #   if event.is_directory:
-  #     pass
-  #   else:
-  #     self.dAPIObj.warningRansom(fileName, event.event_type, event.src_path)
-
-  # def on_moved(self, event):
-  #   """
-  #   [responsible for ransom check on moved events]
-
-  #   Args:
-  #       event ([object]): [object from class FileSystemEventHandler]
-  #   """
-
-  #   # save file name here
-  #   fileName = os.path.basename(event.src_path)
-  #   # print(f"fileName is now: {fileName}")
-
-  #   if event.is_directory:
-  #     pass
-  #   else:
-  #     self.dAPIObj.warningRansom(fileName, event.event_type, event.src_path)
+  #     return(self.eventDateTime, fileName, event.event_type, event.src_path)

@@ -8,7 +8,7 @@ class DBConn:
 
     if (self.createConnection() != None):
       self.dbConn = self.createConnection()
-      print("[+]Successfully connected to DB")
+      # print("[+]Successfully connected to DB")
     else:
       print("[-]Database Connection not possible working offline!")
 
