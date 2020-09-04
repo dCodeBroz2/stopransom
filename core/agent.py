@@ -71,6 +71,7 @@ class Handler(FileSystemEventHandler):
     [initializes an object from class detectionAPI to call its warningRansom method]
     """
 
+    # TODO: change time to UTC
     unlocalisedDatetime = datetime.now()
     dateTimeLocal = unlocalisedDatetime.astimezone(tz = tz.tzlocal()).replace(microsecond=0)
     localZoneName = get_localzone()
@@ -79,7 +80,7 @@ class Handler(FileSystemEventHandler):
 
   def sendReport(self, eventDateTime, fileName, event_type, src_path):
 
-    base_host = "127.0.0.1"
+    base_host = "192.168.1.5"
     base_port = 9090
     base_url = "/sendReports"
     base_method = "POST"

@@ -1,5 +1,6 @@
 from flask import Flask, request
 import DBConn
+import detectionAPI
 
 class agentHandler:
   host = '0.0.0.0'
@@ -19,6 +20,7 @@ class agentHandler:
     Parse request from agent and write to DB
     """
     objDB = DBConn.DBConn()
+    dAPIObj = detectionAPI.detectionAPI()
 
     req = request.form
 
@@ -30,11 +32,13 @@ class agentHandler:
     # print(req)
     # print(eventDateTime, fileName, event_type, src_path)
     # return req
-    objDB.writeToDB(eventDateTime, fileName, event_type, src_path)
+    if (dAPIObj.ransomDetect(eventDateTime, fileName, event_type, src_path)):
+      # if True, the file is a ransomware, otherwise get over it
+      objDB.writeToDB(eventDateTime, fileName, event_type, src_path)
+    else:
+      pass
 
     # lets tell them we got the event
     return '200'
 
   app.run(host, port, deBug)
-
-obj = agentHandler()

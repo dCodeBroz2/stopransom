@@ -1,9 +1,7 @@
-import watchDOG
+import agentHandler
 
 if __name__ == '__main__':
-    w = watchDOG.watchDOG()
-    w.run()
-
+  handlerObj = agentHandler.agentHandler()
 
 """
   TODO:
