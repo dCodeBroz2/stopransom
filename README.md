@@ -1,4 +1,13 @@
 # stopransom
+This is a educational project for detecting and in the future 
+ stoping ransomwares on any operating system or storages.
+For now it only stores the ransom files that are created on a target directory inside a DB.
+
+#TODO:
+ 1. Add graphical interface with react-js
+ 2. Add prevention mechanisms, kill pid or stop the handle that is doing ransom.
+
+SETUP:
 1. install deps:
  a. watchdog
  b. colored
