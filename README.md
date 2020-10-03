@@ -1,5 +1,5 @@
 # stopransom
-This is a educational project for detecting and in the future 
+This is an educational project for detecting and in the future 
  stoping ransomwares on any operating system or storages.
 For now it only stores the ransom files that are created on a target directory inside a DB.
 
